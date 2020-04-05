@@ -1,9 +1,7 @@
 
 var scores, roundScore, activePlayer
 
-scores = [0,0]
-roundScore = 0
-activePlayer = 0
+init()
 
 
 // document.querySelector('#score-' + activePlayer).textContent = dice
@@ -49,7 +47,17 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
   document.querySelector('#current-' + activePlayer).textContent = '0';
 
 
-  //3. Change Player
+  //3. Check if Winner
+
+  if (scores[activePlayer] >= 20) {
+    document.querySelector('#name-' + activePlayer).textContent = 'WINNER';
+    diceNone()
+    document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner')
+    document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active')
+
+  }
+
+  //4. Change Player
   nextPlayer()
 
 });
@@ -70,8 +78,11 @@ function nextPlayer() {
   diceNone()
 }
 
-
-
+function init() {
+  scores = [0,0]
+  roundScore = 0
+  activePlayer = 0
+}
 
 
 // /*
