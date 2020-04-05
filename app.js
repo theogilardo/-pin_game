@@ -3,17 +3,6 @@ var scores, roundScore, activePlayer
 
 init()
 
-
-// document.querySelector('#score-' + activePlayer).textContent = dice
-// document.querySelector('#score-' + activePlayer).innerHTML = '<strong>' + dice + '</strong>'
-
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
-diceNone()
-
-
 document.querySelector('.btn-roll').addEventListener('click', function() {
 
   //1. Random Number
@@ -54,7 +43,6 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     diceNone()
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner')
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active')
-
   }
 
   //4. Change Player
@@ -62,6 +50,8 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 
 });
 
+
+document.querySelector('.btn-new').addEventListener('click', init);
 
 
 function diceNone() {
@@ -82,6 +72,20 @@ function init() {
   scores = [0,0]
   roundScore = 0
   activePlayer = 0
+
+  document.getElementById('score-0').textContent = '0';
+  document.getElementById('score-1').textContent = '0';
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0';
+  document.querySelector('.player-0-panel').classList.remove('active')
+  document.querySelector('.player-0-panel').classList.add('active')
+  document.querySelector('.player-1-panel').classList.remove('active')
+  document.getElementById('name-0').textContent = 'Player 1';
+  document.getElementById('name-1').textContent = 'Player 2';
+  document.querySelector('.player-0-panel').classList.remove('winner')
+  document.querySelector('.player-1-panel').classList.remove('winner')
+
+  diceNone()
 }
 
 
