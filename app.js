@@ -9,11 +9,6 @@ activePlayer = 0
 // document.querySelector('#score-' + activePlayer).textContent = dice
 // document.querySelector('#score-' + activePlayer).innerHTML = '<strong>' + dice + '</strong>'
 
-function diceNone() {
-  document.querySelector('.dice').style.display = 'none';
-}
-
-
 document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
 document.getElementById('current-0').textContent = '0';
@@ -24,7 +19,7 @@ diceNone()
 document.querySelector('.btn-roll').addEventListener('click', function() {
 
   //1. Random Number
-  dice = Math.floor(Math.random()*6) +1
+  dice = Math.floor(Math.random()*6) + 1
 
   //2. Display Result
   diceDOM = document.querySelector('.dice');
@@ -34,25 +29,46 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
   //3. Update score if dice !== 1
   if (dice !== 1) {
     //Update Score
-    document.querySelector('#current-' + activePlayer).textContent = roundScore;
     roundScore += dice;
+    document.querySelector('#current-' + activePlayer).textContent = roundScore;
   } else {
     //Change Player
-     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-     roundScore = 0;
-     document.querySelector('.player-1-panel').classList.toggle('active')
-     document.querySelector('.player-0-panel').classList.toggle('active')
-     diceNone()
-
+     nextPlayer()
   }
+});
 
+
+document.querySelector('.btn-hold').addEventListener('click', function() {
+
+  //1. Add score & Update Player Score board
+  scores[activePlayer] += roundScore
+  document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+
+
+  //2. Set current sc<ore to 0
+  document.querySelector('#current-' + activePlayer).textContent = '0';
+
+
+  //3. Change Player
+  nextPlayer()
 
 });
 
 
 
+function diceNone() {
+  document.querySelector('.dice').style.display = 'none';
+}
 
-
+function nextPlayer() {
+  activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+  roundScore = 0;
+  document.querySelector('.player-1-panel').classList.toggle('active')
+  document.querySelector('.player-0-panel').classList.toggle('active')
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0';
+  diceNone()
+}
 
 
 
